@@ -1,13 +1,13 @@
 import React, { useEffect,useState } from 'react'
 import { Text, View, ScrollView, StyleSheet } from 'react-native'
-import {ListItem,Avatar} from 'react-native-elements';
-
+import {ListItem,Avatar,Card} from 'react-native-elements';
+//import axios from 'axios';
 
   
 const Homepage=({navigation})=> {
     const [users, setUsers] = useState([]);
     useEffect(() => {
-        fetch('https://api.github.com/users')
+        fetch("http://api.github.com/users")
         .then(response => response.json())
         .then(data => {
             setUsers(data);
@@ -31,7 +31,8 @@ const Homepage=({navigation})=> {
                         <ListItem.Title style={{fontSize:18}} >{item.login}</ListItem.Title>
 
                     </ListItem.Content>
-                   
+                    <ListItem.Chevron color="#000"  />
+
                     </ListItem>
                     
                 ))}

@@ -1,6 +1,6 @@
 import React,{useEffect,useState} from 'react'
 import { View, Text, ScrollView, Linking, Button } from 'react-native';
-import { ListItem, Avatar, Icon } from "react-native-elements";
+import { ListItem, Avatar, Icon, Card } from "react-native-elements";
 const UserInfo = ({route}) => {
     const data=route.params;
     
@@ -27,18 +27,29 @@ const UserInfo = ({route}) => {
     }, [])
     
     return (
-        <View style={{backgroundColor:'#da7f8f'}}>
+        <View style={{backgroundColor:'#da7f8f', height:'100%'}}>
         
             <Avatar size="xlarge" rounded containerStyle={{alignSelf:'center'}} source={{uri:data.avatar_url}}/>
-            <ScrollView>
+           
+           
             <Text style={{ alignSelf:'center', fontSize:20}}>{info.name}</Text>
-            <Text style={{alignSelf:'center', fontSize:15}}>{info.location}</Text>
-            <Text style={{alignSelf:'center'}}>{info.followers} followers</Text>
+            <View style={{flexDirection:'row',alignSelf:'center'}}>
+            <Icon name="map-marker" type="font-awesome" size={18} />
+            <Text style={{ fontSize:15}}> {info.location}</Text>
+            </View>
+            <View style={{flexDirection:'row', alignSelf:'center'}}>
+            <Icon name="users" type="font-awesome" size={18} />
+            <Text > {info.followers} followers</Text>
+            </View>
             <Text style={{alignSelf:'center'}}>{info.following} following</Text>
             <Text style={{alignSelf:'center'}}>{subscriptions.length} subscriptions</Text>
-            <Text style={{alignSelf:'center'}}>{info.public_repos} Repositories</Text>
+            <View style={{flexDirection:'row', alignSelf:'center'}}>
+            <Icon name="folder" type="font-awesome" size={18} />
+            <Text style={{alignSelf:'center'}}> {info.public_repos} Repositories</Text>
+            </View>
+            <ScrollView scrollEnabled={expanded}>
             <ListItem.Accordion
-                containerStyle={{width:300,alignSelf:'center', height:50,backgroundColor: '#cdc733'}}
+                containerStyle={{alignSelf:'center', height:50,backgroundColor: '#cdc733'}}
                 content={
                     <>
                     {/* <Icon name="place" size={30} /> */}
@@ -65,7 +76,7 @@ const UserInfo = ({route}) => {
                 ))}
                 </ListItem.Accordion>
             
-            </ScrollView>
+                </ScrollView>
             
         </View>
     )
